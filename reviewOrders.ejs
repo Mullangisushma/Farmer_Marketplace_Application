@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Review Products</h2>
+    <% if (orders.length === 0) { %>
+        <p>No products available for review.</p>
+    <% } else { %>
+        <ul>
+            <% orders.forEach(order => { %>
+                <li>
+                    <strong>Product:</strong> <%= order.product_name %><br>
+                    <form action="/reviews" method="post">
+                        <input type="hidden" name="order_id" value="<%= order.order_id %>">
+                        <input type="hidden" name="product_id" value="<%= order.product_id %>">
+                        <label for="rating">Rating:</label>
+                        <input type="number" name="rating" min="1" max="5" required><br>
+                        <label for="review_text">Review:</label>
+                        <textarea name="review_text" required></textarea><br>
+                        <button type="submit">Submit Review</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    <% } %>
+</div>
